@@ -6,78 +6,37 @@ struct node{
     struct node *link;
 };
 
-struct node *head;
+struct node *tail;
 
 void InsertBeg(int n){
     struct node *temp;
     temp = (struct node *)malloc(sizeof(struct node));
     temp->data = n;
-    if(head == NULL){
-        head = temp;
-        head->link = NULL;
+    temp->link = NULL;
+    if(tail == NULL){
+        tail = temp;
+        tail->link = tail;
     }
     else{
-        temp->link = head;
-        head = temp;
+        temp->link = tail->link;
+        tail->link = temp;
     }
 }
 
 void InsertEnd(int n){
-    struct node *temp;
-    temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = n;
-    if(head == NULL){
-        temp->link = NULL;
-        head = temp;
-    }
-    else{
-        temp->link = NULL;
-        struct node *temp2;
-        temp2 = head;
-        while(temp2->link != NULL)
-        temp2 = temp2->link;
-        temp2->link = temp;
-    }
+
 }
 
 void DeleteBeg(){
-    struct node *temp;
-    if(head == NULL)
-        printf("Nothing to delete in the list\n");
-    else{
-        temp = head;
-        head = head->link;
-        free(head);
-    }
+
 }
 
 void DeleteEnd(){
-    struct node *temp;
-    if(head == NULL)
-        printf("Nothing to delete in the list\n");
-    else{
-        temp = head;
-    while(temp->link != NULL)
-        temp = temp->link;
-        free(temp);
-        }
+
 }
 
 void InsertLoc(int loc, int n){
-    int i;
-    struct node *temp, *temp2;
-    temp = (struct node *)malloc(sizeof(struct node));
-    temp->data = n;
-    temp->link = NULL;
-    temp2 = head;
-    loc -= 1;
-    for(i=loc; i>=2; i--){
-        temp2 = temp2->link;
-        
-    }
-    temp->link = temp2->link;
-    temp2->link = temp;
-    
+
 }
 
 void DeleteLoc(int n){
@@ -85,27 +44,23 @@ void DeleteLoc(int n){
 }
 
 void PrintList(void){
-    if(head == NULL)
-        printf("The Singly Linked List is Empty\n");
-    else{
-        struct node *temp;
-        temp = head;
-        printf("The Singly Linked List data's are: ");
-        while(temp != NULL){
-            printf("%d ",temp->data);
-            temp = temp->link;
-        }
-        printf("\n");
-    }
+    struct node *temp;
+    temp = tail->link;
+    printf("The Data present in Circular Singly Linked List is: ");
+    do{
+        printf("%d ",temp->data);
+        temp = temp->link;
+    } while(temp != tail->link);
+    printf("\n");
 }
 
 int main()
 {
+    tail = NULL;
     int i, n, loc;
-
     while(1){
         printf("\n<--------------------------------------------------------->\n");
-        printf("SINGLY LINKED LIST!!!\n");
+        printf("CIRCULAR SINGLY LINKED LIST!!!\n");
         printf("<--------------------------------------------------------->\n");
         printf("List Operations\n");
         printf("1.Insert at Beginning\n");
@@ -158,7 +113,6 @@ int main()
             exit(0);
             break;
             }
-
     }
 }
 return 0;
