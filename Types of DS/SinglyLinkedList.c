@@ -47,41 +47,52 @@ void DeleteBeg(){
     else{
         temp = head;
         head = head->link;
-        free(head);
+        free(temp);
     }
 }
 
 void DeleteEnd(){
-    struct node *temp;
+    struct node *temp, *temp2;
     if(head == NULL)
         printf("Nothing to delete in the list\n");
     else{
         temp = head;
-    while(temp->link != NULL)
+    while(temp->link->link != NULL)
         temp = temp->link;
-        free(temp);
+        temp2 = temp->link;
+        free(temp2);
+        temp->link=NULL;
         }
 }
 
 void InsertLoc(int loc, int n){
     int i;
-    struct node *temp, *temp2;
+    struct node *temp, *temp2, *temp3;
     temp = (struct node *)malloc(sizeof(struct node));
     temp->data = n;
     temp->link = NULL;
-    temp2 = head;
-    loc -= 1;
-    for(i=loc; i>=2; i--){
+    temp2 = temp3 = head;
+    for(i=1; i<loc-1; i++){
         temp2 = temp2->link;
-        
     }
-    temp->link = temp2->link;
+    temp3 = temp2->link;
     temp2->link = temp;
-    
+    temp->link = temp3;
+    temp = temp2 = temp3 = NULL;
 }
 
-void DeleteLoc(int n){
-    
+void DeleteLoc(int loc){
+    int i;
+    struct node *temp, *temp2, *temp3;
+    temp2 = temp3 = temp = head;
+    for(i=1; i<loc-1; i++){
+        temp = temp->link;
+    }
+    temp2 = temp->link;
+    temp3 = temp2->link;
+    free(temp2);
+    temp->link = temp3;
+    temp = temp3 = NULL;
 }
 
 void PrintList(void){

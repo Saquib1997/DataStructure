@@ -78,9 +78,30 @@ void DeleteEnd(){
 }
 
 void InsertLoc(int loc, int n){
-
+    struct node *temp;
+    int count = 1;
+    struct node *new;
+    new = (struct node *)(malloc(sizeof(struct node)));
+    new->data = n;
+    temp = tail->link;
+    while(count != loc-1){
+        count++;
+        temp = temp->link;
+    }
+    if (temp == tail->link){
+        new->link = tail->link;
+        tail->link = new;
+        new = NULL;
+        temp = NULL;
+    }   
+    else{
+        new->link = temp->link;
+        temp->link = new;
+        new = NULL;
+        temp = NULL;
+    }
 }
-
+ 
 void DeleteLoc(int n){
     
 }
