@@ -144,14 +144,13 @@ int. a,b,sum,diff,prod;
 a=6 ;
 b=4;
 func(a,b,&sum,&diff,&prod) ;
-printf ("Sum = %d, Difference = %d, Product
+printf ("Sum = %d, Difference = %d, Product%d\n",sum,diff,prod) ;
 }
 func (int x, int y, int *ps, lIlt. *pd, int *pp)
 {
 *ps=X+y;
 *pd=x-y;
 *pp=x*y;
-%d\n",sum,diff,prod) ;
 }
 ```
 
@@ -169,14 +168,14 @@ For example a function of this form is invalid
 ```c
 main()
 {
-int. *ptr;
+int = *ptr;
 ptr=func ( ) ;
-·int * func ()
+}
+int * func ()
+{
 int x=5;
 int *p=&x;
-
-return P;
-
+return p;
 }
 ```
 
@@ -185,11 +184,11 @@ The address returned by func( ) is assigned to pointer variable ptr inside main(
 **Passing a 1-D Array to a Function**
 
 We can declare it as an unsized or sized array or we can declare it as a pointer.
-fune (int a[J]);
+func (int a[j]);
 
-fune (int a [5] ) ;
+func (int a [5] ) ;
 
-fune (int *a);
+func (int *a);
 
 /*P8.21 Program to verify the fact that when an array is passed to· a
 function, the· receiving argument is declared as a pointer * /
@@ -198,20 +197,20 @@ function, the· receiving argument is declared as a pointer * /
 #include<stdio.h>
 main( )
 {
-float f_arr[5]={1.4,2.5,3.7,4.1,5.9}i
-int i_arr[5]={1,2,3,4,5}i
-char c_arr[5]={ 'a', 'b', 'c', 'd', 'e'}i
-printf("Inside main( ")i
-printf("Size of arr %u\t",sizeof(f_arr))i
-printf("Size of arr %u\t",sizeof(i_arr))i
-printf("Size of arr %u\n",sizeof(c_arr))i
-func(f_arr,i_arr,c_arr) i
+float f_arr[5]={1.4,2.5,3.7,4.1,5.9};
+int i_arr[5]={1,2,3,4,5};
+char c_arr[5]={ 'a', 'b', 'c', 'd', 'e'};
+printf("Inside main( ");
+printf("Size of arr %u\t",sizeof(f_arr));
+printf("Size of arr %u\t",sizeof(i_arr));
+printf("Size of arr %u\n",sizeof(c_arr));
+func(f_arr,i_arr,c_arr);
 }
-func(f16at f[ J,int *i,char c[5])
+func(float f[],int *i,char c[5])
 {
-printf("Inside func() ")i
+printf("Inside func() ");
 printf("Size of f %d\t",sizeof(f));
-printf("Size of i %d\t",sizeof(i))i
+printf("Size of i %d\t",sizeof(i));
 printf ("Size of c %d\n", sizeof (c));
 }
 ```
@@ -237,13 +236,11 @@ main( )
 int i,arr[4]={5,lO,15,20};
 int *pa[4];
 for(i=O;i<4;i++)
-pari] = &arr[i];
+pa[i] = &arr[i];
 for(i=O;i<4;i++)
 {
-printf ("pa [%d]
-printf (" *pa [%d]
-= %u \ t" , i, pa [ i] ) ;
-= %d\n",i,*pa[i]);
+printf ("pa [%d]= %u \ t" , i, pa [ i] ) ;
+printf (" *pa [%d]= %d\n",i,*pa[i]);
 }
 ```
 
@@ -383,26 +380,29 @@ The code of a function resides in memory hence every function has an address lik
 #include<stdio.h>
 main( )
 {
-int funcI ( );
-printf ("Address of function main() is
-printf ("Address .of function funcI () is
-funcI(); /*Function call */
+int func1( );
+printf ("Address of function main() is %u\n",main);
+printf ("Address .of function func1() is %u\n",func1);
+func1(); /*Function call */
 }
-funcI ( ){printf("India is great\n");}
-0utput:
-Address of function maine ) is : 657
-Address of function func 1( ). is : 691
+int func1()
+{
+printf("India is great\n");
+}
+Output:
+Address of function main() is : 657
+Address of function func1( ) is : 691
 India is great
 ```
 
 **Declaring A Pointer To A Function**
 
 ```c
-return type (*ptr_name )(type1, type2, );
+return type (*ptr_name )(type1, type2);
 for example :    float (*fp)( int );
                  char (*func_p)(float, char);
 here fp is a pointer that can point to any function that returns a float value and accepts an int value
-arglument.
+argument.
 ```
 
 ```c
@@ -411,7 +411,7 @@ float func( int , int );/*Declaring a function*/
 fp = func; /*Assign address of function func() to pointer fp*/
 ```
 
-**Passing a Function's Address as an Argument to Other Function**
+**Passing a Function's Address as an Argument to other Function**
 
 We can send the function's address as an argument to other function in the same way as we send other arguments. To receive the function's address as an argument, a formal parameter of the appropriate type should be declared. We can then invoke the function sent as an argument by dereferencing the formal pointer variable. The following program will make this point clear.
 
@@ -420,15 +420,15 @@ We can send the function's address as an argument to other function in the same 
 #include<stdio.h>
 main ( )
 {
-void func(char,void(*fp) (float));
+void func(char,void(*fp) (float)); //This is Function Decleration....!!!We can declare a function inside main also and alo in global space
 void funl(float);
 printf ("Function main () called\n");
-func (a , funl) ;
+func ('a', funl);
 }
-void func(char b,void (*fp) (float)  /*Address of funl stored in fp*/
+void func(char b,void (*fp) (float))  /*Address of funl stored in fp*/
 {
 printf ("Function func() called\n") ;
-(*fp) (8.5); /*Calling void funl indirectly using pointer*/
+(*fp)(8.5); /*Calling void funl indirectly using pointer*/
 }
 void funl(float)
 {          
@@ -436,23 +436,24 @@ printf ("Function funl () called");
 }
 
 Output:
-Function maine ) called
+Function main( ) called
 Function func( ) called
-Function funI ( ) called
+Function fun1 ( ) called
 ```
 
 ```c
-/* P8.37. Program to pass a pointE;!r containing function's address as an argument*/
+/* P8.37. Program to pass a pointer containing function's address as an argument*/
 #include<stdio.h>
 main ( )
-void func(char,void (*fp)(float);
+{
+void func(char,void (*fp)(float));
 void funl (float) ;
 void (*p) (float);
 p=funl;
 printf ("Function main ( called\n") ;
 func('a',p);
 }
-void func(char b,void (*fp) (float) / *Value of p stored in fp* /
+void func(char b,void (*fp) (float)) / *Value of p stored in fp* /
 {
 printf ("Function func ( )called\n") ;
 (*fp) (8.5); /*Calling funl indirectly using pointer*/
@@ -489,7 +490,7 @@ Instead of the above assignment statements, we could have initialized the array 
 float (*fp[] )(float , int ) = {'add, sub, mul, div };
 Now we can see that~
 (*fp)[O]( a, b);				is equivalent to add(a, b);
-(*fp)[l]( a; b);				is equivalent to sub(a, b);
+(*fp)[l]( a, b);				is equivalent to sub(a, b);
 (*fp)[2]( a, b);				is equivalent to mul(a, b);
 (*fp)[3]( a, b);				is equivalent to div(a, b);
 
@@ -973,12 +974,9 @@ little-endian	-	Least significant byte is stored at the lowest address.
 #include<stdio.h>
 main()
 {
-union{
-	int x;
-	char c [2J;
-	}var;
-var.x=l;
-if(var.c[OJ==l)
+int a=1;
+char *p=(char *)&a;
+if(*p==1)
 printf("Little endian\n");
 else
 printf ("Big Endian\n");
