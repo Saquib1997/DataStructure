@@ -1,5 +1,3 @@
-## 	 7/2/2022
-
 #### ARRAY
 
 ###### Note: Any changes made to the array inside the function are visible in the calling function. (we can not swap 2 numbers using call by value but can swap array using same.)
